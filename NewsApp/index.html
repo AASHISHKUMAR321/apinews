@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f033c92939.js" crossorigin="anonymous"></script>
+    <title>ApiNews</title>
+    <link rel="stylesheet" href="styles/category.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+</head>
+<body>
+
+    <!-- navigation div -->
+    <div id="container"></div>
+    <hr>
+    <!-- category div -->
+   <div id="category_div"></div>
+    <!-- show news div -->
+    <div id="news"></div> 
+
+</body>
+</html>
+<script type="module">
+    //Importing Components
+    import navbar from "./components/navbar.js";
+    import getNews from "./components/getNews.js";
+    import appendData from "./components/appendData.js";
+    import category from "./components/category.js";
+
+    //geting div and Elements
+    let main_div=document.getElementById('container');
+    let news_div=document.getElementById('news');
+    let category_div=document.getElementById('category_div');
+
+
+    main_div.innerHTML=navbar();
+    category_div.innerHTML=category();
+
+    //getting  all top news
+    async function news(){
+
+        let apiToken="a3ceba329e26b3a9f20850a9c7c92a3a";
+        // let res= getNews(`https://newsapi.org/v2/top-headlines?country=${'in'}&apiKey=34867d52f0de40f5b3252702ba15755d`);
+        let res=getNews(`https://gnews.io/api/v4/top-headlines?token=a3ceba329e26b3a9f20850a9c7c92a3a&country=${'in'}&lang=${'en'}`)
+      
+        res.then((res)=>{
+            console.log(res);
+            appendData(res.articles,news_div);
+        })
+    }
+    news();
+
+    //getting news using category
+    async function using_cat(category){
+
+        // let res= getNews(`https://newsapi.org/v2/top-headlines?category=${category}&apiKey=34867d52f0de40f5b3252702ba15755d&country=${'in'}`);
+        let res= getNews(`https://gnews.io/api/v4/top-headlines?token=a3ceba329e26b3a9f20850a9c7c92a3a&topic=${category}&lang=${'en'}`);
+        res.then((res)=>{
+            console.log(res);
+            appendData(res.articles,news_div);
+        })
+    }
+
+
+    // using_cat();
+
+    //getting news using input
+
+    async function using_input(){
+       let name= document.getElementById('search').value;
+        // let res=getNews(`https://newsapi.org/v2/everything?q=${name}&from=2022-01-10&sortBy=popularity&apiKey=34867d52f0de40f5b3252702ba15755d`);
+        let res=getNews(`https://gnews.io/api/v4/search?q=${name}&token=a3ceba329e26b3a9f20850a9c7c92a3a&lang=${'en'}`);
+        res.then((res)=>{
+            console.log("news"+res);
+            appendData(res.articles,news_div);
+        })
+    }
+
+    //search button function
+    document.getElementById('search_btn').onclick=()=>{
+        news_div.innerHTML=null;
+        using_input();
+       
+    }
+
+    let b_div=document.getElementById('b');
+    b_div.onclick=()=>{
+        news_div.innerHTML=null;
+        using_cat("business");
+    }
+    let e_div=document.getElementById('e');
+    e_div.onclick=()=>{
+        news_div.innerHTML=null;
+        using_cat("entertainment");
+    }
+    let g_div=document.getElementById('g');
+    g_div.onclick=()=>{
+        news_div.innerHTML=null;
+        using_cat("general");
+    }
+    let h_div=document.getElementById('h');
+    h_div.onclick=()=>{
+        news_div.innerHTML=null;
+        using_cat("health");
+    }
+    let s_div=document.getElementById('s');
+    s_div.onclick=()=>{
+        news_div.innerHTML=null;
+        using_cat("science");
+    }
+    let sp_div=document.getElementById('sp');
+    sp_div.onclick=()=>{
+        news_div.innerHTML=null;
+        using_cat("sports");
+    }
+    let t_div=document.getElementById('t');
+    t_div.onclick=()=>{
+        news_div.innerHTML=null;
+        using_cat("technology");
+    }
+
+    let userData=JSON.parse(localStorage.getItem('userData'));
+    let user=document.getElementById('user');
+    user.textContent=userData.username;
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+#fullInfo{
+           
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns:33% 65%;
+    justify-content: space-between;
+
+}
+img{
+    width: 400px;
+    height: 400px;
+}
+p{
+    font-size: 25px;
+}
+#readMore{
+    padding: 20px;
+    color: white;
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f033c92939.js" crossorigin="anonymous"></script>
+    <title>NewsApp</title>
+    <link rel="stylesheet" href="styles/category.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <style>
+        #fullInfo{
+            width: 90%;
+            margin: auto;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns:33% 65%;
+            justify-content: space-between;
+
+        }
+        img{
+            width: 300px;
+            height: 300px;
+        }
+        #fullInfo>div{
+           
+        }
+        p{
+            font-size: 25px;
+        }
+        #readMore{
+            padding: 20px;
+            color: white;
+        }
+        #full_img{
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- navigation div -->
+    <div id="container"></div>
+    <hr>
+    <!-- category div -->
+   <div id="category_div"></div>
+    <!-- show news div -->
+    <div id="news"></div> 
+
+    <div id="fullInfo">
+       
+    </div>
+
+</body>
+</html>
+
+<script type="module">
+     //Importing Components
+     import navbar from "./components/navbar.js";
+    import getNews from "./components/getNews.js";
+    import appendData from "./components/appendData.js";
+    import category from "./components/category.js";
+
+    //geting div and Elements
+    let main_div=document.getElementById('container');
+    let news_div=document.getElementById('news');
+    let category_div=document.getElementById('category_div');
+    let info_div=document.getElementById('fullInfo');
+
+
+    main_div.innerHTML=navbar();
+    category_div.innerHTML=category();
+
+
+    //getting news using category
+    async function using_cat(category){
+
+        let res= getNews(`https://newsapi.org/v2/top-headlines?category=${category}&apiKey=34867d52f0de40f5b3252702ba15755d&country=${'in'}`);
+        res.then((res)=>{
+            console.log(res);
+            appendData(res.articles,news_div);
+        })
+    }
+
+
+
+    // using_cat();
+
+    //getting news using input
+
+    async function using_input(){
+       let name= document.getElementById('search').value;
+        let res=getNews(`https://newsapi.org/v2/everything?q=${name}&from=2022-01-10&sortBy=popularity&apiKey=34867d52f0de40f5b3252702ba15755d`);
+        res.then((res)=>{
+            console.log(res);
+            appendData(res.articles,news_div);
+        })
+    }
+
+    //search button function
+    document.getElementById('search_btn').onclick=()=>{
+        news_div.innerHTML=null;
+        using_input();
+       
+    }
+
+    let b_div=document.getElementById('b');
+    b_div.onclick=()=>{
+        news_div.innerHTML=null;
+        info_div.innerHTML=null;
+        using_cat("business");
+    }
+    let e_div=document.getElementById('e');
+    e_div.onclick=()=>{
+        news_div.innerHTML=null;
+        info_div.innerHTML=null;
+        using_cat("entertainment");
+    }
+    let g_div=document.getElementById('g');
+    g_div.onclick=()=>{
+        news_div.innerHTML=null;
+        info_div.innerHTML=null;
+        using_cat("general");
+    }
+    let h_div=document.getElementById('h');
+    h_div.onclick=()=>{
+        news_div.innerHTML=null;
+        info_div.innerHTML=null;
+        using_cat("health");
+    }
+    let s_div=document.getElementById('s');
+    s_div.onclick=()=>{
+        news_div.innerHTML=null;
+        info_div.innerHTML=null;
+        using_cat("science");
+    }
+    let sp_div=document.getElementById('sp');
+    sp_div.onclick=()=>{
+        news_div.innerHTML=null;
+        info_div.innerHTML=null;
+        using_cat("sports");
+    }
+    let t_div=document.getElementById('t');
+    t_div.onclick=()=>{
+        news_div.innerHTML=null;
+        info_div.innerHTML=null;
+        using_cat("technology");
+    }
+</script>
+
+<script>
+    
+    let clicked_news=JSON.parse(localStorage.getItem('newsItem'));
+    console.log(clicked_news);
+
+    let info_div=document.getElementById('fullInfo');
+
+    clicked_news.map((elem)=>{
+        let {image,title,description,content,author,url,publishedAt}=elem;
+        let div1=document.createElement('div');
+        let div2=document.createElement('div');
+
+        //createing Element
+        let News_image=document.createElement('img');
+        News_image.setAttribute('id','full_img')
+        let news_title=document.createElement('h1');
+        let date=document.createElement('p');
+        let des=document.createElement('p');
+        let author_name=document.createElement('p');
+        let news_content=document.createElement('p');
+        let button=document.createElement('button');
+
+
+        //appending data into it
+        News_image.src=image;
+        news_title.textContent=title;
+        date.textContent=publishedAt;
+        des.textContent=description;
+        author_name.textContent=author;
+        news_content.textContent=content;
+        button.textContent="Read More";
+        button.setAttribute('id','readMore');
+        
+        button.onclick=()=>{
+            window.open(url, '_blank');
+            
+            
+        }
+    
+
+        //Appending div1->img ans div2->content
+        div1.setAttribute('id','image');
+        div1.append(News_image);
+        div2.append(news_title,des,news_content,author_name,button);
+        info_div.append(div1,div2);
+    })
+    
+
+</script>
