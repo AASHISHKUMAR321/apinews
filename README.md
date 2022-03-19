@@ -2,7 +2,7 @@
 <h3>A web application to get the news and top headlines</h3>
 <p>Api News top news headlines and  category based on user interset like Science Entertainment business Sports etc.
 </p>
-<p>Live <a href="https://apinewsapp.netlify.app/">Link</a></p>
+<p>Live <a href="https://apinewsapp.netlify.app/" target="blank">Link</a></p>
 <p>Features:</p>
   <p>1.Top news headlines</p>
   <p>2.News by category</p>
