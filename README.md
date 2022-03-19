@@ -1,6 +1,6 @@
 # ApiNews
 
-<h3>A web application to get the news and top headlines</h3>
+<h3>A web application to get the News</h3>
 <img src="https://aashishkumar321.netlify.app/images/projects/apinews.gif" width="90%" height="300" align="center"/>
 <p>Api News top news headlines and  category based on user interset like Science Entertainment business Sports etc.
 </p>
