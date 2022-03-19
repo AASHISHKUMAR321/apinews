@@ -1,4 +1,4 @@
-apinews
+# apinews
 <h3>A web application to get the news and top headlines</h3>
 <p>Api News top news headlines and  category based on user interset like Science Entertainment business Sports etc.
 </p>
