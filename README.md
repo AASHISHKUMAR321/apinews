@@ -11,7 +11,7 @@
   <p>3.Search bar</p>
 <p>Tech Stack: HTML | CSS | JAVASCRIPT</p>
 
-<h2>Key learnings</h2>
+# Key learnings
 
 - How to deal with APIs.
 - How manage Code  Effeciently.
