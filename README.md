@@ -1,4 +1,4 @@
-# apinews
+# ApiNews
 
 <h3>A web application to get the news and top headlines</h3>
 <img src="https://aashishkumar321.netlify.app/images/projects/apinews.gif" width="90%" height="300" align="center"/>
